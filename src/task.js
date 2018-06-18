@@ -10,7 +10,11 @@ class Task{
     Task.all.push(this)
   }
 
-  
+  render() {
+    return ``
+  }
+
+
 }
 
 Task.all = []

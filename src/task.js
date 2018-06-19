@@ -10,13 +10,28 @@ class Task {
     Task.all.push(this);
   }
 
-  createElement() {
-    let div = document.createElement("div");
-    div.innerHTML = `
-    <p><strong>${this.description}</strong></p>
-    <p>Due Date: ${this.due_date}<p>
-    `;
-    return div;
+  append(element) {
+    element.appendChild(this.listElement());
+  }
+
+  listElement() {
+    let li = document.createElement("li");
+    let h4 = document.createElement("h4");
+    h4.innerText = this.description;
+    h4.addEventListener("dblclick", () => {
+      h4.setAttribute("contenteditable", "true");
+    });
+    h4.addEventListener("blur", () => {
+      this.updateDescription(h4);
+    });
+    li.appendChild(h4);
+    return li;
+  }
+
+  updateDescription(element) {
+    element.setAttribute("contenteditable", "false");
+    this.description = element.innerText;
+    patchTask(this);
   }
 }
 

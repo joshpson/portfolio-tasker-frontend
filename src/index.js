@@ -1,8 +1,10 @@
 console.log("Index.js loaded");
 
-function postProject(project) {
+let currentUser;
+
+function patchProject(project) {
   fetch(`http://localhost:3000/api/v1/projects/${project.id}`, {
-    method: "POST",
+    method: "PATCH",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json"
@@ -13,12 +15,43 @@ function postProject(project) {
     .then(json => console.log(json));
 }
 
+function patchTask(task) {
+  fetch(`http://localhost:3000/api/v1/tasks/${task.id}`, {
+    method: "PATCH",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(task)
+  })
+    .then(res => res.json())
+    .then(json => console.log(json));
+}
+
+function postTask(data, project) {
+  fetch(`http://localhost:3000/api/v1/tasks/`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+    .then(res => res.json())
+    .then(json => {
+      let task = new Task(json);
+      project.tasks.push(task);
+      project.appendTasks();
+    });
+}
+
 function getProject(projId) {
   fetch(`http://localhost:3000/api/v1/projects/${projId}`)
     .then(res => res.json())
     .then(json => {
       let project = new Project(json);
       project.renderDiv();
+      project.appendTasks();
     });
 }
 
@@ -50,6 +83,7 @@ function setLoginFormListener() {
     user.initializeProjects();
     loginForm.reset();
     console.log(user);
+    currentUser = user;
   });
 }
 

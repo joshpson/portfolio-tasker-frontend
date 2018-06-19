@@ -8,11 +8,13 @@ class Project {
     Project.all.push(this);
   }
 
-  div() {
+  renderDiv() {
+    let projContainer = document.getElementById("projects");
     let div = document.createElement("div");
     div.appendChild(this.titleHeader());
-    this.appendTasks(div);
-    return div;
+    div.appendChild(this.tasksUl());
+    div.appendChild(this.newTaskListItem());
+    projContainer.appendChild(div);
   }
 
   titleHeader() {
@@ -27,22 +29,43 @@ class Project {
     return h1;
   }
 
-  appendTasks(element) {
-    this.tasks.forEach(function(taskData) {
-      let task = new Task(taskData);
-      element.appendChild(task.createElement());
-    });
+  tasksUl() {
+    let ul = document.createElement("ul");
+    ul.setAttribute("id", `project-${this.id}`);
+    return ul;
   }
 
-  renderDiv() {
-    let projContainer = document.getElementById("projects");
-    projContainer.appendChild(this.div());
+  appendTasks() {
+    let ul = document.getElementById(`project-${this.id}`);
+    ul.innerHTML = "";
+    this.tasks.forEach(function(taskData) {
+      let task = new Task(taskData);
+      task.append(ul);
+    });
   }
 
   updateTitle(element) {
     element.setAttribute("contenteditable", "false");
     this.title = element.innerText;
-    postProject(this);
+    patchProject(this);
+  }
+
+  newTaskListItem() {
+    let form = document.createElement("form");
+    let input = document.createElement("input");
+    input.type = "text";
+    input.value = "Create new task...";
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      let data = {
+        description: input.value,
+        project_id: this.id,
+        user_id: currentUser.id
+      };
+      postTask(data, this);
+    });
+    form.appendChild(input);
+    return form;
   }
 }
 

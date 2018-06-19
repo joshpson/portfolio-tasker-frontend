@@ -1,12 +1,24 @@
 console.log("Index.js loaded");
 
+function postProject(project) {
+  fetch(`http://localhost:3000/api/v1/projects/${project.id}`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(project)
+  })
+    .then(res => res.json())
+    .then(json => console.log(json));
+}
+
 function getProject(projId) {
   fetch(`http://localhost:3000/api/v1/projects/${projId}`)
     .then(res => res.json())
     .then(json => {
       let project = new Project(json);
-      project.render();
-      project.createTasks();
+      project.renderDiv();
     });
 }
 

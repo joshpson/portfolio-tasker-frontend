@@ -10,11 +10,11 @@ class Task {
     Task.all.push(this);
   }
 
-  createDiv() {
+  createElement() {
     let div = document.createElement("div");
     div.innerHTML = `
-    <p>${this.description}</p>
-    <p>${this.due_date}<p>
+    <p><strong>${this.description}</strong></p>
+    <p>Due Date: ${this.due_date}<p>
     `;
     return div;
   }

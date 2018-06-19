@@ -8,32 +8,41 @@ class Project {
     Project.all.push(this);
   }
 
-  projectElement() {
+  div() {
     let div = document.createElement("div");
-    let h1 = document.createElement("h1");
-    h1.innerText = this.title;
-    h1.addEventListener("dblclick", function() {
-      h1.setAttribute("contenteditable", "true");
-    });
-    h1.addEventListener("blur", function() {
-      h1.setAttribute("contenteditable", "false");
-    });
-
-    div.appendChild(h1);
+    div.appendChild(this.titleHeader());
+    this.appendTasks(div);
     return div;
   }
 
-  render() {
-    let projectDiv = document.getElementById("projects");
-    projectDiv.appendChild(this.projectElement());
+  titleHeader() {
+    let h1 = document.createElement("h1");
+    h1.innerText = this.title;
+    h1.addEventListener("dblclick", () => {
+      h1.setAttribute("contenteditable", "true");
+    });
+    h1.addEventListener("blur", () => {
+      this.updateTitle(h1);
+    });
+    return h1;
   }
 
-  createTasks() {
+  appendTasks(element) {
     this.tasks.forEach(function(taskData) {
       let task = new Task(taskData);
-      let projectDiv = document.getElementById("projects");
-      projectDiv.appendChild(task.createDiv());
+      element.appendChild(task.createElement());
     });
+  }
+
+  renderDiv() {
+    let projContainer = document.getElementById("projects");
+    projContainer.appendChild(this.div());
+  }
+
+  updateTitle(element) {
+    element.setAttribute("contenteditable", "false");
+    this.title = element.innerText;
+    postProject(this);
   }
 }
 

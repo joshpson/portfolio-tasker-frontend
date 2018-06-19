@@ -8,9 +8,25 @@ class User {
 
   initializeProjects() {
     this.projects.forEach(function(project) {
-      getProject(project.id);
+      getProject(project.id).then(json => {
+        let project = new Project(json);
+        project.renderDiv();
+        project.appendTasks();
+      });
     });
   }
 }
 
 User.all = [];
+
+User.login = function() {
+  currentUser = User.all.find(function(user) {
+    return user.username === loginData();
+  });
+  if (currentUser) {
+    hideLoginFormDiv();
+  }
+  currentUser.initializeProjects();
+  displayProjectFormDiv();
+  loginForm().reset();
+};

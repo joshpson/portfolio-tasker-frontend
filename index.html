@@ -1,26 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Tasks App</title>
+  <title>Task App</title>
   <script src="src/index.js"></script>
+  <script src="src/rails-api.js"></script>
   <script src="src/task.js"></script>
   <script src="src/user.js"></script>
   <script src="src/project.js"></script>
 </head>
 <body>
-  <div>
+  <h1>Task App</h1>
+  <div id="login-form-div">
+    <h1>Login</h1>
     <form id="login-form">
       <input type="text" name="username">
       <input type="submit" name="login" value="login">
     </form>
   </div>
-  <h1>Task App</h1>
-
   <div id='projects'>
-
   </div>
-  <div id='new-project'>
+  <div id='new-project-form-div' style="display: none">
     <h1>New Project</h1>
+    <form id="project-form">
+      <input type="text" name="project">
+      <input type="submit" name="submit">
+    </form>
   </div>
 </body>
 </html>

@@ -60,13 +60,11 @@ class Project {
         project_id: this.id,
         user_id: currentUser.id
       };
-      postTask(data)
-        .then(res => res.json())
-        .then(json => {
-          let task = new Task(json);
-          this.tasks.push(task);
-          this.appendTasks();
-        });
+      postTask(data).then(json => {
+        let task = new Task(json);
+        this.tasks.push(task);
+        this.appendTasks();
+      });
       form.reset();
     });
     form.appendChild(input);

@@ -1,20 +1,25 @@
 class Project {
-  constructor(object) {
-    this.id = object.id;
-    this.title = object.title;
-    this.description = object.description;
-    this.status = object.status;
-    this.tasks = object.tasks;
-
+  constructor(obj) {
+    this.id = obj.id;
+    this.title = obj.title;
+    this.description = obj.description;
+    this.status = obj.status;
+    this.tasks = obj.tasks;
     Project.all.push(this);
   }
 
   projectElement() {
     let div = document.createElement("div");
-    div.innerHTML = `
-    <h1>${this.title}</h1>
-    <h3>${this.description}<h3>
-    `;
+    let h1 = document.createElement("h1");
+    h1.innerText = this.title;
+    h1.addEventListener("dblclick", function() {
+      h1.setAttribute("contenteditable", "true");
+    });
+    h1.addEventListener("blur", function() {
+      h1.setAttribute("contenteditable", "false");
+    });
+
+    div.appendChild(h1);
     return div;
   }
 

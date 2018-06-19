@@ -9,12 +9,11 @@ class Project {
   }
 
   renderDiv() {
-    let projContainer = document.getElementById("projects");
     let div = document.createElement("div");
     div.appendChild(this.titleHeader());
     div.appendChild(this.tasksUl());
-    div.appendChild(this.newTaskListItem());
-    projContainer.appendChild(div);
+    div.appendChild(this.newTaskForm());
+    projectContainer().appendChild(div);
   }
 
   titleHeader() {
@@ -50,11 +49,10 @@ class Project {
     patchProject(this);
   }
 
-  newTaskListItem() {
+  newTaskForm() {
     let form = document.createElement("form");
     let input = document.createElement("input");
     input.type = "text";
-    input.value = "Create new task...";
     form.addEventListener("submit", e => {
       e.preventDefault();
       let data = {
@@ -62,7 +60,14 @@ class Project {
         project_id: this.id,
         user_id: currentUser.id
       };
-      postTask(data, this);
+      postTask(data)
+        .then(res => res.json())
+        .then(json => {
+          let task = new Task(json);
+          this.tasks.push(task);
+          this.appendTasks();
+        });
+      form.reset();
     });
     form.appendChild(input);
     return form;

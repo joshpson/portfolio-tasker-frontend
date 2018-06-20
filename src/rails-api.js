@@ -34,6 +34,17 @@ function patchProject(project) {
   }).then(res => res.json());
 }
 
+function deleteProject(project) {
+  //not in use yet
+  fetch(`http://localhost:3000/api/v1/projects/${project.id}`, {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    }
+  });
+}
+
 //Task CRUD
 
 function postTask(data) {

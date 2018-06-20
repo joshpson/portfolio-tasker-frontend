@@ -10,10 +10,23 @@ class Project {
 
   renderDiv() {
     let div = document.createElement("div");
+    div.setAttribute("id", `project-${this.id}-div`);
     div.appendChild(this.titleHeader());
     div.appendChild(this.tasksUl());
     div.appendChild(this.newTaskForm());
+    div.appendChild(this.removeDivButton(div));
     projectContainer().appendChild(div);
+
+  }
+
+  removeDivButton(div){
+    let remove = document.createElement("BUTTON");
+    remove.innerText = "Delete"
+    remove.addEventListener("click", (e) => {
+      deleteProject(this);
+      div.remove();
+    });
+    return remove;
   }
 
   titleHeader() {
@@ -30,12 +43,12 @@ class Project {
 
   tasksUl() {
     let ul = document.createElement("ul");
-    ul.setAttribute("id", `project-${this.id}`);
+    ul.setAttribute("id", `project-${this.id}-ul`);
     return ul;
   }
 
   appendTasks() {
-    let ul = document.getElementById(`project-${this.id}`);
+    let ul = document.getElementById(`project-${this.id}-ul`);
     ul.innerHTML = "";
     this.tasks.forEach(function(taskData) {
       let task = new Task(taskData);

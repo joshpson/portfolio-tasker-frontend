@@ -9,21 +9,23 @@ class Project {
   }
 
   renderDiv() {
-    let div = document.createElement("div");
-    div.setAttribute("id", `project-${this.id}-div`);
-    div.className = "mdl-cell mdl-cell--4-col";
-    div.appendChild(this.titleHeader());
-    div.appendChild(this.tasksUl());
-    div.appendChild(this.newTaskForm());
-    div.appendChild(this.removeDivButton(div));
-    projectContainer().appendChild(div);
-
+    let containerDiv = document.createElement("div");
+    containerDiv.className = "mdl-cell mdl-cell--4-col";
+    let card = document.createElement("div");
+    card.setAttribute("id", `project-${this.id}-div`);
+    card.className = "demo-card-wide mdl-card mdl-shadow--2dp";
+    card.appendChild(this.titleHeader());
+    card.appendChild(this.tasksUl());
+    card.appendChild(this.newTaskForm());
+    card.appendChild(this.removeDivButton(card));
+    containerDiv.appendChild(card);
+    projectContainer().appendChild(containerDiv);
   }
 
-  removeDivButton(div){
+  removeDivButton(div) {
     let remove = document.createElement("BUTTON");
-    remove.innerText = "Delete"
-    remove.addEventListener("click", (e) => {
+    remove.innerText = "Delete";
+    remove.addEventListener("click", e => {
       deleteProject(this);
       div.remove();
     });
@@ -31,20 +33,25 @@ class Project {
   }
 
   titleHeader() {
-    let h1 = document.createElement("h1");
-    h1.innerText = this.title;
-    h1.addEventListener("dblclick", () => {
-      h1.setAttribute("contenteditable", "true");
+    let containerDiv = document.createElement("div");
+    containerDiv.className = "mdl-card__title";
+    let h2 = document.createElement("h2");
+    h2.className = "mdl-card__title-text";
+    h2.innerText = this.title;
+    h2.addEventListener("dblclick", () => {
+      h2.setAttribute("contenteditable", "true");
     });
-    h1.addEventListener("blur", () => {
-      this.updateTitle(h1);
+    h2.addEventListener("blur", () => {
+      this.updateTitle(h2);
     });
-    return h1;
+    containerDiv.appendChild(h2);
+    return containerDiv;
   }
 
   tasksUl() {
     let ul = document.createElement("ul");
     ul.setAttribute("id", `project-${this.id}-ul`);
+    ul.className = "mdl-list";
     return ul;
   }
 

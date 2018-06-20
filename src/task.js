@@ -16,15 +16,24 @@ class Task {
 
   listElement() {
     let li = document.createElement("li");
-    let h4 = document.createElement("h4");
-    h4.innerText = this.description;
-    h4.addEventListener("dblclick", () => {
-      h4.setAttribute("contenteditable", "true");
+    li.className = "mdl-list__item";
+    let span = document.createElement("span");
+    span.className = "mdl-list__item-primary-content";
+    span.innerText = this.description;
+    span.addEventListener("dblclick", () => {
+      span.setAttribute("contenteditable", "true");
     });
-    h4.addEventListener("blur", () => {
-      this.updateDescription(h4);
+    span.addEventListener("blur", () => {
+      this.updateDescription(span);
     });
-    li.appendChild(h4);
+    let checkBox = document.createElement("span");
+    checkBox.className = "mdl-list__item-secondary-action";
+    let input = document.createElement("input");
+    input.className = "mdl-checkbox__input mdl-js-ripple-effect";
+    input.type = "checkbox";
+    checkBox.appendChild(input);
+    li.appendChild(span);
+    li.appendChild(checkBox);
     return li;
   }
 

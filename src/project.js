@@ -31,7 +31,7 @@ class Project {
 
   removeDivButton(div) {
     let buttonDiv = document.createElement("div");
-    buttonDiv.className = "mdl-card__actions";
+    buttonDiv.className = "mdl-card__actions mdl-card--border";
     let remove = document.createElement("BUTTON");
     remove.className =
       "mdl-button mdl-js-button mdl-button--raised mdl-button--colored";
@@ -48,7 +48,7 @@ class Project {
     let containerDiv = document.createElement("div");
     containerDiv.className = "mdl-card__title";
     let h2 = document.createElement("h2");
-    h2.className = "mdl-card__title-text";
+    h2.className = "mdl-card__title-text mdl-card--border";
     h2.innerText = this.title;
     h2.addEventListener("dblclick", () => {
       h2.setAttribute("contenteditable", "true");

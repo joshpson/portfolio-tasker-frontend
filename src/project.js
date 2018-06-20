@@ -32,13 +32,17 @@ class Project {
   }
 
   removeDivButton(div) {
+    let buttonDiv = document.createElement("div");
+    buttonDiv.className = "mdl-card__actions";
     let remove = document.createElement("BUTTON");
+    remove.className = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored";
     remove.innerText = "Delete";
     remove.addEventListener("click", e => {
       deleteProject(this);
       div.remove();
     });
-    return remove;
+    buttonDiv.appendChild(remove);
+    return buttonDiv;
   }
 
   titleHeader() {
@@ -89,9 +93,18 @@ class Project {
   }
 
   newTaskForm() {
+    let formDiv = document.createElement("div")
+    formDiv.className = "mdl-card__menu"
     let form = document.createElement("form");
+    formDiv.appendChild(form)
+    let div = document.createElement("div")
+    div.className = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
     let input = document.createElement("input");
     input.type = "text";
+    input.placeholder = "Create New Task..."
+    input.className = "mdl-textfield__input";
+    form.appendChild(div);
+    div.appendChild(input);
     form.addEventListener("submit", e => {
       e.preventDefault();
       let data = {
@@ -107,7 +120,7 @@ class Project {
       form.reset();
     });
     form.appendChild(input);
-    return form;
+    return formDiv;
   }
 }
 

@@ -18,17 +18,15 @@ class Project {
   }
 
   renderDiv() {
-    let containerDiv = document.createElement("div");
-    containerDiv.className = "mdl-cell mdl-cell--3-col";
     let card = document.createElement("div");
     card.setAttribute("id", `project-${this.id}-div`);
-    card.className = "demo-card-wide mdl-card mdl-shadow--2dp";
+    card.className =
+      "mdl-cell mdl-cell--4-col demo-card-wide mdl-card mdl-shadow--2dp";
     card.appendChild(this.titleHeader());
     card.appendChild(this.tasksUl());
     card.appendChild(this.newTaskForm());
     card.appendChild(this.removeDivButton(card));
-    containerDiv.appendChild(card);
-    projectContainer().appendChild(containerDiv);
+    projectContainer().appendChild(card);
   }
 
   removeDivButton(div) {

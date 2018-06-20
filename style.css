@@ -10,11 +10,11 @@
   color: #fff;
 }*/
 
-.mdl-card__actions {
+/*.mdl-card__actions {
   display: flex;
   box-sizing: border-box;
   align-items: center;
-}
+}*/
 
 .mdl-card__title-text {
   font-weight: bold;
@@ -34,4 +34,13 @@
   bottom: 30px;
   left: 50px;
   display: none;
+}
+
+.content-grid {
+  max-width: 960px;
+}
+
+.mdl-card__actions > .mdl-button--colored {
+  margin-right: 100px;
+  margin-left: 100px;
 }

@@ -11,6 +11,7 @@ class Project {
   renderDiv() {
     let div = document.createElement("div");
     div.setAttribute("id", `project-${this.id}-div`);
+    div.className = "mdl-cell mdl-cell--4-col";
     div.appendChild(this.titleHeader());
     div.appendChild(this.tasksUl());
     div.appendChild(this.newTaskForm());

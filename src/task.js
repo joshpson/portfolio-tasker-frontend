@@ -32,6 +32,12 @@ class Task {
     span.addEventListener("blur", () => {
       this.updateDescription(span);
     });
+    li.appendChild(span);
+    li.appendChild(this.checkBoxSpan(li));
+    return li;
+  }
+
+  checkBoxSpan(li) {
     let checkSpan = document.createElement("span");
     checkSpan.className = "mdl-list__item-secondary-action";
     let checkBox = document.createElement("input");
@@ -39,14 +45,11 @@ class Task {
     checkBox.type = "checkbox";
     checkBox.addEventListener("change", (e) => {
       this.status = "Completed";
-      console.log(this)
-      li.remove()
-      patchTask(this)
+      console.log(this);
+      li.remove();
+      patchTask(this);
     })
-    checkSpan.appendChild(checkBox);
-    li.appendChild(span);
-    li.appendChild(checkSpan);
-    return li;
+    return checkSpan.appendChild(checkBox);
   }
 
   updateDescription(element) {

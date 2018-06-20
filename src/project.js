@@ -4,8 +4,17 @@ class Project {
     this.title = obj.title;
     this.description = obj.description;
     this.status = obj.status;
-    this.tasks = obj.tasks;
+    this.tasks = this.createTasks(obj);
     Project.all.push(this);
+  }
+
+  createTasks(obj){
+    let taskArray = [];
+    obj.tasks.forEach(function(taskData) {
+      let task = new Task(taskData);
+      taskArray.push(task);
+    });
+    return taskArray;
   }
 
   renderDiv() {
@@ -66,8 +75,7 @@ class Project {
   appendTasks() {
     let ul = document.getElementById(`project-${this.id}-ul`);
     ul.innerHTML = "";
-    this.tasks.forEach(function(taskData) {
-      let task = new Task(taskData);
+    this.tasks.forEach(function(task) {
       if(task.status != "Completed"){
         task.append(ul);
       }

@@ -10,8 +10,8 @@ function taskDrag(e) {
 function taskDrop(e) {
   e.preventDefault();
   if (e.target.classList.contains("dropzone")) {
-    let data = e.dataTransfer.getData("elementid");
-    e.target.appendChild(document.getElementById(data));
+    let listItemId = e.dataTransfer.getData("elementid");
+    e.target.appendChild(document.getElementById(listItemId));
     console.log(e.dataTransfer.getData("taskid"));
     let task = Task.all.find(function(task) {
       return task.id === parseInt(e.dataTransfer.getData("taskid"));
@@ -19,7 +19,4 @@ function taskDrop(e) {
     task.project_id = parseInt(e.target.dataset.projectid);
     patchTask(task);
   }
-  //`list-item-${this.id}`;
-
-  //need to change the task project id and update it
 }

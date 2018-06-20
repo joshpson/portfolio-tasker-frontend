@@ -32,14 +32,20 @@ class Task {
     span.addEventListener("blur", () => {
       this.updateDescription(span);
     });
-    let checkBox = document.createElement("span");
-    checkBox.className = "mdl-list__item-secondary-action";
-    let input = document.createElement("input");
-    input.className = "mdl-checkbox__input mdl-js-ripple-effect";
-    input.type = "checkbox";
-    checkBox.appendChild(input);
+    let checkSpan = document.createElement("span");
+    checkSpan.className = "mdl-list__item-secondary-action";
+    let checkBox = document.createElement("input");
+    checkBox.className = "mdl-checkbox__input mdl-js-ripple-effect";
+    checkBox.type = "checkbox";
+    checkBox.addEventListener("change", (e) => {
+      this.status = "Completed";
+      console.log(this)
+      li.remove()
+      patchTask(this)
+    })
+    checkSpan.appendChild(checkBox);
     li.appendChild(span);
-    li.appendChild(checkBox);
+    li.appendChild(checkSpan);
     return li;
   }
 

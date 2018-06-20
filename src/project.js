@@ -68,7 +68,9 @@ class Project {
     ul.innerHTML = "";
     this.tasks.forEach(function(taskData) {
       let task = new Task(taskData);
-      task.append(ul);
+      if(task.status != "Completed"){
+        task.append(ul);
+      }
     });
   }
 

@@ -24,16 +24,16 @@ function loginData() {
   return document.querySelector('input[name="username"]').value;
 }
 
-function projectForm() {
-  return document.querySelector("#project-form");
-}
-
-function projectFormDiv() {
-  return document.querySelector("#new-project-form-div");
-}
-
 function projectData() {
   return document.querySelector('input[name="project"]').value;
+}
+
+function projectButtonDiv() {
+  return document.querySelector(".project-button-div");
+}
+
+function projectButton() {
+  return document.querySelector(".project-button");
 }
 
 function hideLoginFormDiv() {
@@ -41,7 +41,7 @@ function hideLoginFormDiv() {
 }
 
 function displayProjectFormDiv() {
-  projectFormDiv().style.display = "block";
+  projectButtonDiv().style.display = "block";
 }
 
 //Event Listeners
@@ -53,11 +53,11 @@ function loginFormListener() {
   });
 }
 
-function projectFormListener() {
-  projectForm().addEventListener("submit", e => {
+function projectButtonListener() {
+  projectButton().addEventListener("click", e => {
     e.preventDefault();
     let data = {
-      title: projectData()
+      title: "New Project Title"
     };
     postProject(data).then(json => {
       let project = new Project(json);
@@ -69,7 +69,6 @@ function projectFormListener() {
       project.renderDiv();
       project.appendTasks();
     });
-    projectForm().reset();
   });
 }
 
@@ -81,7 +80,7 @@ function initialize() {
     });
   });
   loginFormListener();
-  projectFormListener();
+  projectButtonListener();
 }
 
 document.addEventListener("DOMContentLoaded", initialize);

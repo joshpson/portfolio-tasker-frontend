@@ -8,7 +8,7 @@ class Project {
     Project.all.push(this);
   }
 
-  createTasks(obj){
+  createTasks(obj) {
     let taskArray = [];
     obj.tasks.forEach(function(taskData) {
       let task = new Task(taskData);
@@ -19,7 +19,7 @@ class Project {
 
   renderDiv() {
     let containerDiv = document.createElement("div");
-    containerDiv.className = "mdl-cell mdl-cell--4-col";
+    containerDiv.className = "mdl-cell mdl-cell--3-col";
     let card = document.createElement("div");
     card.setAttribute("id", `project-${this.id}-div`);
     card.className = "demo-card-wide mdl-card mdl-shadow--2dp";
@@ -35,7 +35,8 @@ class Project {
     let buttonDiv = document.createElement("div");
     buttonDiv.className = "mdl-card__actions";
     let remove = document.createElement("BUTTON");
-    remove.className = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored";
+    remove.className =
+      "mdl-button mdl-js-button mdl-button--raised mdl-button--colored";
     remove.innerText = "Delete";
     remove.addEventListener("click", e => {
       deleteProject(this);
@@ -80,7 +81,7 @@ class Project {
     let ul = document.getElementById(`project-${this.id}-ul`);
     ul.innerHTML = "";
     this.tasks.forEach(function(task) {
-      if(task.status != "Completed"){
+      if (task.status != "Completed") {
         task.append(ul);
       }
     });
@@ -93,15 +94,16 @@ class Project {
   }
 
   newTaskForm() {
-    let formDiv = document.createElement("div")
-    formDiv.className = "mdl-card__menu"
+    let formDiv = document.createElement("div");
+    formDiv.className = "mdl-card__supporting-text";
     let form = document.createElement("form");
-    formDiv.appendChild(form)
-    let div = document.createElement("div")
-    div.className = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+    formDiv.appendChild(form);
+    let div = document.createElement("div");
+    div.className =
+      "mdl-textfield mdl-js-textfield mdl-textfield--floating-label";
     let input = document.createElement("input");
     input.type = "text";
-    input.placeholder = "Create New Task..."
+    input.placeholder = "Create New Task...";
     input.className = "mdl-textfield__input";
     form.appendChild(div);
     div.appendChild(input);

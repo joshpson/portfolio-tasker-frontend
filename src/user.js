@@ -28,6 +28,7 @@ User.login = function() {
     hideLoginFormDiv();
   }
   currentUser.initializeProjects();
-  displayProjectFormDiv();
+  //displayProjectFormDiv();
   loginForm().reset();
+  displayProjectFormDiv();
 };

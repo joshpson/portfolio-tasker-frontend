@@ -43,12 +43,12 @@ class Task {
     let checkBox = document.createElement("input");
     checkBox.className = "mdl-checkbox__input mdl-js-ripple-effect";
     checkBox.type = "checkbox";
-    checkBox.addEventListener("change", (e) => {
+    checkBox.addEventListener("change", e => {
       this.status = "Completed";
       console.log(this);
       li.remove();
       patchTask(this);
-    })
+    });
     return checkSpan.appendChild(checkBox);
   }
 

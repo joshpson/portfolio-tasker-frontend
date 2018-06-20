@@ -16,7 +16,13 @@ class Task {
 
   listElement() {
     let li = document.createElement("li");
+    li.id = `list-item-${this.id}`;
+    li.setAttribute("data-taskid", this.id);
     li.className = "mdl-list__item";
+    li.draggable = "true";
+    li.addEventListener("dragstart", function(e) {
+      taskDrag(e);
+    });
     let span = document.createElement("span");
     span.className = "mdl-list__item-primary-content";
     span.innerText = this.description;

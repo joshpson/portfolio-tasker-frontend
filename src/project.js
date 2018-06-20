@@ -50,8 +50,16 @@ class Project {
 
   tasksUl() {
     let ul = document.createElement("ul");
+    ul.addEventListener("dragover", function(e) {
+      e.preventDefault();
+      console.log("dragover");
+    });
+    ul.addEventListener("drop", function(e) {
+      taskDrop(e);
+    });
     ul.setAttribute("id", `project-${this.id}-ul`);
-    ul.className = "mdl-list";
+    ul.setAttribute("data-projectid", this.id);
+    ul.className = "mdl-list dropzone dragenter";
     return ul;
   }
 

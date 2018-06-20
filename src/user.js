@@ -30,5 +30,4 @@ User.login = function() {
   currentUser.initializeProjects();
   //displayProjectFormDiv();
   loginForm().reset();
-  displayProjectFormDiv();
 };

@@ -28,20 +28,12 @@ function projectData() {
   return document.querySelector('input[name="project"]').value;
 }
 
-function projectButtonDiv() {
-  return document.querySelector(".project-button-div");
-}
-
 function projectButton() {
   return document.querySelector(".project-button");
 }
 
 function hideLoginFormDiv() {
   loginFormDiv().style.display = "none";
-}
-
-function displayProjectFormDiv() {
-  projectButtonDiv().style.display = "block";
 }
 
 //Event Listeners

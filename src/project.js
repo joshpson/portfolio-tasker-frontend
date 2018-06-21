@@ -18,15 +18,21 @@ class Project {
   }
 
   renderDiv() {
+    let containerDiv = document.createElement("div");
+    containerDiv.className = "mdl-cell mdl-cell--4-col";
     let card = document.createElement("div");
     card.setAttribute("id", `project-${this.id}-div`);
-    card.className =
-      "mdl-cell mdl-cell--4-col demo-card-wide mdl-card mdl-shadow--2dp";
+    card.className = " mdl-card mdl-shadow--2dp dropzone";
     card.appendChild(this.titleHeader());
     card.appendChild(this.tasksUl());
     card.appendChild(this.newTaskForm());
     card.appendChild(this.removeDivButton(card));
-    projectContainer().appendChild(card);
+    card.addEventListener("dragenter", e => projectDragEnter(e), false);
+    card.addEventListener("dragleave", e => projectDragLeave(e), false);
+    card.addEventListener("dragover", e => projectDragOver(e), false);
+    card.addEventListener("drop", e => taskDrop(e, this), false);
+    containerDiv.appendChild(card);
+    projectContainer().appendChild(containerDiv);
   }
 
   removeDivButton(div) {
@@ -62,16 +68,9 @@ class Project {
 
   tasksUl() {
     let ul = document.createElement("ul");
-    ul.addEventListener("dragover", function(e) {
-      e.preventDefault();
-      console.log("dragover");
-    });
-    ul.addEventListener("drop", function(e) {
-      taskDrop(e);
-    });
     ul.setAttribute("id", `project-${this.id}-ul`);
     ul.setAttribute("data-projectid", this.id);
-    ul.className = "mdl-list dropzone dragenter";
+    ul.className = "mdl-list task-ul";
     return ul;
   }
 

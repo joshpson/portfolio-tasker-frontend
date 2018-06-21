@@ -11,8 +11,7 @@ class User {
     this.projects.forEach(function(project) {
       getProject(project.id).then(json => {
         let project = new Project(json);
-        project.renderDiv();
-        project.appendTasks();
+        project.renderProjectDiv();
       });
     });
   }

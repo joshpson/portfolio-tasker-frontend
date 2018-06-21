@@ -28,10 +28,6 @@ function projectData() {
   return document.querySelector('input[name="project"]').value;
 }
 
-function projectButtonDiv() {
-  return document.querySelector(".project-button-div");
-}
-
 function projectButton() {
   return document.querySelector(".project-button");
 }
@@ -40,8 +36,19 @@ function hideLoginFormDiv() {
   loginFormDiv().style.display = "none";
 }
 
-function displayProjectFormDiv() {
-  projectButtonDiv().style.display = "block";
+function getActionBar(){
+  return document.querySelector(".actionbar")
+}
+
+function sortOptions() {
+  // let aSort = document.createElement("a");
+  // aSort.className = "sort-az";
+  sortButton = document.createElement("input");
+  sortButton.className = "sort";
+  sortButton.type = "image";
+  sortButton.src="./img/sort.png";
+  return getActionBar().appendChild(sortButton);
+  
 }
 
 //Event Listeners
@@ -72,6 +79,18 @@ function projectButtonListener() {
   });
 }
 
+  function sortButtonListener() {
+    sortOptions().addEventListener("click", (e) => {
+      console.log("clicked sort button")
+      let dropdownDiv = document.createElement("div");
+      dropdownDiv.className = "dropdown";
+      let sortOption1 = document.createElement("a");
+      a.href = "#";
+      dropdownDiv.appendChild(sortOption1);
+      sortOptions().appendChild(dropdownDiv);
+    })
+  }
+
 //Initialize
 function initialize() {
   getUsers().then(json => {
@@ -81,6 +100,7 @@ function initialize() {
   });
   loginFormListener();
   projectButtonListener();
+  sortButtonListener();
 }
 
 document.addEventListener("DOMContentLoaded", initialize);

@@ -86,6 +86,7 @@ class Project {
       `demo-menu-lower-right-project-${this.id}`
     );
     projOptionsUl.appendChild(this.returnAlphaSortOption());
+    projOptionsUl.appendChild(this.returnActiveSortOption());
     projOptionsUl.appendChild(this.returnCompletedSortOption());
     return projOptionsUl;
   }
@@ -121,7 +122,7 @@ class Project {
     deleteBtn.innerText = "Delete";
     deleteBtn.addEventListener("click", e => {
       deleteProject(this);
-      div.remove();
+      div.parentElement.remove();
     });
     buttonDiv.appendChild(deleteBtn);
     return buttonDiv;
@@ -150,6 +151,17 @@ class Project {
       this.appendCompletedTasks();
     });
     return completedSort;
+  }
+
+  returnActiveSortOption() {
+    let activeSort = document.createElement("li");
+    activeSort.className = "mdl-menu__item";
+    activeSort.innerText = "active";
+    activeSort.addEventListener("click", e => {
+      console.log("project", this);
+      this.appendActiveTasks();
+    });
+    return activeSort;
   }
 
   //Project Listeners
@@ -183,6 +195,7 @@ class Project {
       postTask(data).then(json => {
         let task = new Task(json);
         this.tasks.push(task);
+        task.project = this;
         this.appendActiveTasks();
       });
       form.reset();

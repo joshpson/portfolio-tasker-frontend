@@ -81,7 +81,7 @@ class Project {
     buttonUl.className = "mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect";
     buttonUl.setAttribute("data-mdl-for", "demo-menu-lower-right");
     let buttonLi = document.createElement("li");
-    buttonLi.class = "mdl-menu__item";
+    buttonLi.className = "mdl-menu__item";
     buttonLi.innerText = "sort by a-z";
     buttonUl.appendChild(buttonLi);
     return buttonUl;

@@ -85,7 +85,7 @@ function projectButtonListener() {
       let dropdownDiv = document.createElement("div");
       dropdownDiv.className = "dropdown";
       let sortOption1 = document.createElement("a");
-      a.href = "#";
+      sortOption1.href = "#";
       dropdownDiv.appendChild(sortOption1);
       sortOptions().appendChild(dropdownDiv);
     })

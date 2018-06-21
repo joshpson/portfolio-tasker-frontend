@@ -52,3 +52,9 @@ body {
 .mdl-card {
   max-width: 100%;
 }
+
+.mdl-card__title-text {
+  width: 100%;
+}
+
+

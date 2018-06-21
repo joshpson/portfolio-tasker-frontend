@@ -72,8 +72,7 @@ function projectButtonListener() {
         user_id: currentUser.id
       };
       postUserProject(userProjectData);
-      project.renderDiv();
-      project.appendTasks();
+      project.renderProjectDiv();
     });
   });
 }

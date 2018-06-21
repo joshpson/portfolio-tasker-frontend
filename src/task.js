@@ -20,9 +20,7 @@ class Task {
     li.setAttribute("data-taskid", this.id);
     li.className = "mdl-list__item";
     li.draggable = "true";
-    li.addEventListener("dragstart", function(e) {
-      taskDrag(e);
-    });
+    li.addEventListener("dragstart", e => taskDrag(e), false);
     let span = document.createElement("span");
     span.className = "mdl-list__item-primary-content";
     span.innerText = this.description;

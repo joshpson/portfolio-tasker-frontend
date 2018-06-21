@@ -36,20 +36,19 @@ function hideLoginFormDiv() {
   loginFormDiv().style.display = "none";
 }
 
-function getActionBar(){
-  return document.querySelector(".actionbar")
+function getActionBar() {
+  return document.querySelector(".actionbar");
 }
 
-function sortOptions() {
-  // let aSort = document.createElement("a");
-  // aSort.className = "sort-az";
-  sortButton = document.createElement("input");
-  sortButton.className = "sort";
-  sortButton.type = "image";
-  sortButton.src="./img/sort.png";
-  return getActionBar().appendChild(sortButton);
-  
-}
+// function sortOptions() {
+//   // let aSort = document.createElement("a");
+//   // aSort.className = "sort-az";
+//   sortButton = document.createElement("input");
+//   sortButton.className = "sort";
+//   sortButton.type = "image";
+//   sortButton.src = "./img/sort.png";
+//   return getActionBar().appendChild(sortButton);
+// }
 
 //Event Listeners
 
@@ -79,17 +78,17 @@ function projectButtonListener() {
   });
 }
 
-  function sortButtonListener() {
-    sortOptions().addEventListener("click", (e) => {
-      console.log("clicked sort button")
-      let dropdownDiv = document.createElement("div");
-      dropdownDiv.className = "dropdown";
-      let sortOption1 = document.createElement("a");
-      sortOption1.href = "#";
-      dropdownDiv.appendChild(sortOption1);
-      sortOptions().appendChild(dropdownDiv);
-    })
-  }
+// function sortButtonListener() {
+//   sortOptions().addEventListener("click", (e) => {
+//     console.log("clicked sort button")
+//     let dropdownDiv = document.createElement("div");
+//     dropdownDiv.className = "dropdown";
+//     let sortOption1 = document.createElement("a");
+//     sortOption1.href = "#";
+//     dropdownDiv.appendChild(sortOption1);
+//     sortOptions().appendChild(dropdownDiv);
+//   })
+// }
 
 //Initialize
 function initialize() {
@@ -100,7 +99,7 @@ function initialize() {
   });
   loginFormListener();
   projectButtonListener();
-  sortButtonListener();
+  //  sortButtonListener();
 }
 
 document.addEventListener("DOMContentLoaded", initialize);

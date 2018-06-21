@@ -33,6 +33,7 @@ class Project {
     card.addEventListener("drop", e => taskDrop(e, this), false);
     containerDiv.appendChild(card);
     projectContainer().appendChild(containerDiv);
+    componentHandler.upgradeElements(containerDiv);
   }
 
   removeDivButton(div) {
@@ -55,11 +56,13 @@ class Project {
     containerDiv.className = "mdl-card__title";
     let h2 = document.createElement("h2");
     let cardButton = document.createElement("button");
-    cardButton.id = "demo-menu-lower-right"
-    cardButton.className = "mdl-button mdl-js-button mdl-button--icon"
+    cardButton.id = `demo-menu-lower-right-project-${this.id}`;
+    cardButton.className = "mdl-button mdl-js-button mdl-button--icon";
+    componentHandler.upgradeElement(cardButton);
+
     let cardI = document.createElement("i");
     cardI.className = "material-icons";
-    cardI.innerText = "more_vert"
+    cardI.innerText = "more_vert";
     h2.className = "mdl-card__title-text mdl-card--border";
     h2.innerText = this.title;
     h2.addEventListener("dblclick", () => {
@@ -70,7 +73,6 @@ class Project {
     });
     containerDiv.appendChild(h2);
     cardButton.appendChild(cardI);
-    // componentHandler.upgradeElement(cardButton);
     containerDiv.appendChild(cardButton);
     containerDiv.appendChild(this.buttonDropdown());
     return containerDiv;
@@ -78,10 +80,11 @@ class Project {
 
   buttonDropdown() {
     let buttonUl = document.createElement("ul");
-    buttonUl.className = "mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect";
-    buttonUl.setAttribute("data-mdl-for", "demo-menu-lower-right");
+    buttonUl.className =
+      "mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect";
+    buttonUl.setAttribute("for", `demo-menu-lower-right-project-${this.id}`);
     let buttonLi = document.createElement("li");
-    buttonLi.class = "mdl-menu__item";
+    buttonLi.className = "mdl-menu__item";
     buttonLi.innerText = "sort by a-z";
     buttonUl.appendChild(buttonLi);
     return buttonUl;

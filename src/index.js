@@ -32,6 +32,14 @@ function projectButton() {
   return document.querySelector(".project-button");
 }
 
+function hideProjectButton() {
+  projectButton().style.display = "none";
+}
+
+function revealProjectButton() {
+  projectButton().style.display = "";
+}
+
 function hideLoginFormDiv() {
   loginFormDiv().style.display = "none";
 }
@@ -61,10 +69,9 @@ function projectButtonListener() {
   });
 }
 
-
-
 //Initialize
 function initialize() {
+  hideProjectButton();
   getUsers().then(json => {
     json.forEach(userData => {
       let user = new User(userData);

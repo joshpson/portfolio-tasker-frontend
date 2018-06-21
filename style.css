@@ -47,9 +47,6 @@ body {
   width: 100%;
 }
 
-.mdl-card__title-text{
+.mdl-card__title-text {
   word-break: break-all;
- 
 }
-
-

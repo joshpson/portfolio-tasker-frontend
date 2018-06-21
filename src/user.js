@@ -27,5 +27,6 @@ User.login = function() {
     hideLoginFormDiv();
   }
   currentUser.initializeProjects();
+  revealProjectButton();
   loginForm().reset();
 };

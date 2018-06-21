@@ -24,13 +24,25 @@ function postProject(data) {
 }
 
 function patchProject(project) {
+  const getCircularReplacer = () => {
+    const seen = new WeakSet;
+    return (key, value) => {
+      if (typeof value === "object" && value !== null) {
+        if (seen.has(value)) {
+          return;
+        }
+        seen.add(value);
+      }
+      return value;
+    };
+  };
   fetch(`http://localhost:3000/api/v1/projects/${project.id}`, {
     method: "PATCH",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(project)
+    body: JSON.stringify(project, getCircularReplacer())
   }).then(res => res.json());
 }
 

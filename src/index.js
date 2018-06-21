@@ -36,22 +36,6 @@ function hideLoginFormDiv() {
   loginFormDiv().style.display = "none";
 }
 
-function getActionBar() {
-  return document.querySelector(".actionbar");
-}
-
-// function sortOptions() {
-//   // let aSort = document.createElement("a");
-//   // aSort.className = "sort-az";
-//   sortButton = document.createElement("input");
-//   sortButton.className = "sort";
-//   sortButton.type = "image";
-//   sortButton.src = "./img/sort.png";
-//   return getActionBar().appendChild(sortButton);
-// }
-
-//Event Listeners
-
 function loginFormListener() {
   loginForm().addEventListener("submit", function(e) {
     e.preventDefault();
@@ -78,17 +62,7 @@ function projectButtonListener() {
   });
 }
 
-// function sortButtonListener() {
-//   sortOptions().addEventListener("click", (e) => {
-//     console.log("clicked sort button")
-//     let dropdownDiv = document.createElement("div");
-//     dropdownDiv.className = "dropdown";
-//     let sortOption1 = document.createElement("a");
-//     sortOption1.href = "#";
-//     dropdownDiv.appendChild(sortOption1);
-//     sortOptions().appendChild(dropdownDiv);
-//   })
-// }
+
 
 //Initialize
 function initialize() {
@@ -99,7 +73,6 @@ function initialize() {
   });
   loginFormListener();
   projectButtonListener();
-  //  sortButtonListener();
 }
 
 document.addEventListener("DOMContentLoaded", initialize);

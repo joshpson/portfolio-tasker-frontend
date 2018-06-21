@@ -11,16 +11,24 @@ class Task {
   }
 
   append(element) {
-    element.appendChild(this.listElement());
+    element.appendChild(this.returnListElement());
   }
 
-  listElement() {
+  // Make list, add list items, make list items draggable
+
+  returnListElement() {
     let li = document.createElement("li");
     li.id = `list-item-${this.id}`;
     li.setAttribute("data-taskid", this.id);
     li.className = "mdl-list__item";
     li.draggable = "true";
     li.addEventListener("dragstart", e => taskDrag(e), false);
+    li.appendChild(this.returnLiSpan());
+    li.appendChild(this.returnCheckBoxSpan(li));
+    return li;
+  }
+// Creating span element, make task editable
+  returnLiSpan() {
     let span = document.createElement("span");
     span.className = "mdl-list__item-primary-content";
     span.innerText = this.description;
@@ -30,12 +38,11 @@ class Task {
     span.addEventListener("blur", () => {
       this.updateDescription(span);
     });
-    li.appendChild(span);
-    li.appendChild(this.checkBoxSpan(li));
-    return li;
+    return span;
   }
 
-  checkBoxSpan(li) {
+  //Create checkboxes and mark items completed
+  returnCheckBoxSpan(li) {
     let checkSpan = document.createElement("span");
     checkSpan.className = "mdl-list__item-secondary-action";
     let checkBox = document.createElement("input");
@@ -43,13 +50,13 @@ class Task {
     checkBox.type = "checkbox";
     checkBox.addEventListener("change", e => {
       this.status = "Completed";
-      console.log(this);
       li.remove();
       patchTask(this);
     });
     return checkSpan.appendChild(checkBox);
   }
 
+  //Update list item descriptions
   updateDescription(element) {
     element.setAttribute("contenteditable", "false");
     this.description = element.innerText;

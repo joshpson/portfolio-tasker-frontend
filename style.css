@@ -24,12 +24,6 @@ body {
   margin-left: 100px;
 }
 
-/* #myInput {
-  margin-left: 600px;
-  background-image: url('./img/searchicon.png'); /* Add a search icon to input */
-/* width: 25%; quarter-width */
-/* } */
-
 .actionbar {
   display: block;
   height: 60px;
@@ -44,10 +38,6 @@ body {
 .highlight {
   border: 5px solid blue;
 }
-
-/*.task-ul {
-  height: 100%;
-}*/
 
 .mdl-card {
   max-width: 100%;

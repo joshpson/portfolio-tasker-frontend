@@ -122,7 +122,7 @@ class Project {
     deleteBtn.innerText = "Delete";
     deleteBtn.addEventListener("click", e => {
       deleteProject(this);
-      div.remove();
+      div.parentElement.remove();
     });
     buttonDiv.appendChild(deleteBtn);
     return buttonDiv;

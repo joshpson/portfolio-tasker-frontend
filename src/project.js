@@ -11,11 +11,18 @@ class Project {
 
   createTasks(obj) {
     let taskArray = [];
-    obj.tasks.forEach(function(taskData) {
+    obj.tasks.forEach(taskData => {
       let task = new Task(taskData);
+      task.project = this;
       taskArray.push(task);
     });
     return taskArray;
+  }
+
+  //Task
+  removeTask(task) {
+    let index = this.tasks.indexOf(task);
+    this.tasks.splice(index, index + 1);
   }
 
   //Project Card Creation

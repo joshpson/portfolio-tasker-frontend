@@ -6,7 +6,6 @@ class Task {
     this.due_date = obj.due_date;
     this.description = obj.description;
     this.status = obj.status;
-
     Task.all.push(this);
   }
 
@@ -27,7 +26,7 @@ class Task {
     li.appendChild(this.returnCheckBoxSpan(li));
     return li;
   }
-// Creating span element, make task editable
+  // Creating span element, make task editable
   returnLiSpan() {
     let span = document.createElement("span");
     span.className = "mdl-list__item-primary-content";

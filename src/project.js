@@ -58,8 +58,6 @@ class Project {
     let cardButton = document.createElement("button");
     cardButton.id = `demo-menu-lower-right-project-${this.id}`;
     cardButton.className = "mdl-button mdl-js-button mdl-button--icon";
-    componentHandler.upgradeElement(cardButton);
-
     let cardI = document.createElement("i");
     cardI.className = "material-icons";
     cardI.innerText = "more_vert";
@@ -83,10 +81,23 @@ class Project {
     buttonUl.className =
       "mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect";
     buttonUl.setAttribute("for", `demo-menu-lower-right-project-${this.id}`);
-    let buttonLi = document.createElement("li");
-    buttonLi.className = "mdl-menu__item";
-    buttonLi.innerText = "sort by a-z";
-    buttonUl.appendChild(buttonLi);
+    let buttonLiAlpha = document.createElement("li");
+    buttonLiAlpha.addEventListener("click", e => {
+      console.log("project", this);
+      this.sortTasksAlphabetically();
+      this.appendTasks();
+    });
+    buttonLiAlpha.className = "mdl-menu__item";
+    buttonLiAlpha.innerText = "sort a-z";
+    buttonUl.appendChild(buttonLiAlpha);
+    let buttonLiCompleted = document.createElement("li");
+    buttonLiCompleted.addEventListener("click", e => {
+      console.log("project", this);
+      this.completedTasks();
+    });
+    buttonLiCompleted.className = "mdl-menu__item";
+    buttonLiCompleted.innerText = "completed";
+    buttonUl.appendChild(buttonLiCompleted);
     return buttonUl;
   }
 
@@ -105,6 +116,24 @@ class Project {
       if (task.status != "Completed") {
         task.append(ul);
       }
+    });
+  }
+
+  completedTasks() {
+    let ul = document.getElementById(`project-${this.id}-ul`);
+    ul.innerHTML = "";
+    this.tasks.forEach(function(task) {
+      if (task.status === "Completed") {
+        task.append(ul);
+      }
+    });
+  }
+
+  sortTasksAlphabetically() {
+    this.tasks.sort(function(a, b) {
+      if (a.description < b.description) return -1;
+      if (a.description > b.description) return 1;
+      return 0;
     });
   }
 

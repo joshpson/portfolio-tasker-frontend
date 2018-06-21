@@ -16,12 +16,20 @@ function loginForm() {
   return document.querySelector("#login-form");
 }
 
+function newUserForm() {
+  return document.querySelector("#create-user-form");
+}
+
 function loginFormDiv() {
   return document.querySelector("#login-form-div");
 }
 
 function loginData() {
-  return document.querySelector('input[name="username"]').value;
+  return document.querySelector("#login-input").value;
+}
+
+function newUserData() {
+  return document.querySelector("#create-user-input").value;
 }
 
 function projectData() {
@@ -47,7 +55,23 @@ function hideLoginFormDiv() {
 function loginFormListener() {
   loginForm().addEventListener("submit", function(e) {
     e.preventDefault();
-    User.login();
+    currentUser = User.all.find(function(user) {
+      return user.username === loginData();
+    });
+    if (currentUser) {
+      User.login();
+    }
+  });
+}
+
+function newUserFormListener() {
+  newUserForm().addEventListener("submit", function(e) {
+    e.preventDefault();
+    postUser(newUserData()).then(json => {
+      console.log(json);
+      currentUser = new User(json);
+      User.login();
+    });
   });
 }
 
@@ -78,6 +102,7 @@ function initialize() {
     });
   });
   loginFormListener();
+  newUserFormListener();
   projectButtonListener();
 }
 

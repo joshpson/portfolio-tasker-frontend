@@ -20,13 +20,8 @@ class User {
 User.all = [];
 
 User.login = function() {
-  currentUser = User.all.find(function(user) {
-    return user.username === loginData();
-  });
-  if (currentUser) {
-    hideLoginFormDiv();
-  }
+  loginForm().reset();
+  hideLoginFormDiv();
   currentUser.initializeProjects();
   revealProjectButton();
-  loginForm().reset();
 };

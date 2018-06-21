@@ -4,6 +4,17 @@ function getUsers() {
   return fetch("http://localhost:3000/api/v1/users").then(res => res.json());
 }
 
+function postUser(username) {
+  return fetch(`http://localhost:3000/api/v1/users/`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ username: username })
+  }).then(res => res.json());
+}
+
 //Project CRUD
 
 function getProject(id) {
@@ -25,7 +36,7 @@ function postProject(data) {
 
 function patchProject(project) {
   const getCircularReplacer = () => {
-    const seen = new WeakSet;
+    const seen = new WeakSet();
     return (key, value) => {
       if (typeof value === "object" && value !== null) {
         if (seen.has(value)) {

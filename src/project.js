@@ -173,10 +173,14 @@ class Project {
     title.addEventListener("dblclick", () => {
       title.setAttribute("contenteditable", "true");
     });
+    title.addEventListener("keypress", e => {
+      if (e.key === "Enter") {
+        console.log(e);
+        this.saveTitle(title);
+      }
+    });
     title.addEventListener("blur", () => {
-      title.setAttribute("contenteditable", "false");
-      this.title = title.innerText;
-      patchProject(this);
+      this.saveTitle(title);
     });
   }
 
@@ -203,6 +207,12 @@ class Project {
       });
       form.reset();
     });
+  }
+
+  saveTitle(title) {
+    title.setAttribute("contenteditable", "false");
+    this.title = title.innerText;
+    patchProject(this);
   }
 
   //Project Task Manipulation

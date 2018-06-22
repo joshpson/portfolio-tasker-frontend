@@ -21,6 +21,7 @@ class Task {
     li.id = `list-item-${this.id}`;
     li.className = "mdl-list__item";
     li.draggable = "true";
+    li.contenteditable = "false";
     this.addListElementListeners(li);
     li.appendChild(this.returnTitleSpan());
     li.appendChild(this.returnSwitchButtonSpan());
@@ -77,10 +78,13 @@ class Task {
     taskTitle.addEventListener("dblclick", () => {
       taskTitle.setAttribute("contenteditable", "true");
     });
+    taskTitle.addEventListener("keypress", e => {
+      if (e.key === "Enter") {
+        this.saveDescription(taskTitle);
+      }
+    });
     taskTitle.addEventListener("blur", () => {
-      taskTitle.setAttribute("contenteditable", "false");
-      this.description = taskTitle.innerText;
-      patchTask(this);
+      this.saveDescription(taskTitle);
     });
   }
 
@@ -98,6 +102,12 @@ class Task {
         }
       }, 250);
     });
+  }
+
+  saveDescription(taskTitle) {
+    taskTitle.setAttribute("contenteditable", "false");
+    this.description = taskTitle.innerText;
+    patchTask(this);
   }
 }
 

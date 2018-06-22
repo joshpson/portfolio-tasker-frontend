@@ -4,7 +4,7 @@ class Project {
     this.id = obj.id;
     this.title = obj.title;
     this.description = obj.description;
-    this.status = obj.status;
+    this.status = "Active";
     this.tasks = this.createTasks(obj);
     Project.all.push(this);
   }

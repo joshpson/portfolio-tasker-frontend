@@ -52,7 +52,7 @@ class Task {
     checkBox.id = `switch-1-task-${this.id}`;
     checkBox.className = "mdl-switch__input";
     checkBox.type = "checkbox";
-    if(this.status === "Completed") {
+    if (this.status === "Completed") {
       checkBox.checked = true;
     } else {
       checkBox.checked = false;
@@ -63,16 +63,15 @@ class Task {
     toggleLabel.appendChild(checkBox);
     checkBox.addEventListener("change", e => {
       console.log(e.target);
-      if(e.target.checked === true){
+      if (e.target.checked === true) {
         this.status = "Completed";
         this.project.appendActiveTasks();
+        patchTask(this);
       } else {
         this.status = "Active";
         this.project.appendCompletedTasks();
+        patchTask(this);
       }
-      // this.status = "Completed";
-      // patchTask(this);
-      // li.remove();
     });
     return checkSpan.appendChild(toggleLabel);
   }

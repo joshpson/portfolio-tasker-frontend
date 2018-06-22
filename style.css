@@ -51,10 +51,10 @@ body {
   word-break: break-all;
 }
 
-.mdl-list__item-primary-content{
+.mdl-list__item-primary-content {
   width: 100%;
 }
 
-.mdl-switch__ripple-container{
-  float: right;
+.mdl-switch {
+  width: 10%;
 }

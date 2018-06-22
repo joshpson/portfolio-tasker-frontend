@@ -135,9 +135,12 @@ class Project {
     alphaSort.className = "mdl-menu__item";
     alphaSort.innerText = "sort a-z";
     alphaSort.addEventListener("click", e => {
-      console.log("project", this);
       this.sortTasksAlphabetically();
-      this.appendActiveTasks();
+      if (this.status === "Active") {
+        this.appendActiveTasks();
+      } else {
+        this.appendCompletedTasks();
+      }
     });
     return alphaSort;
   }
@@ -147,7 +150,7 @@ class Project {
     completedSort.className = "mdl-menu__item";
     completedSort.innerText = "completed";
     completedSort.addEventListener("click", e => {
-      console.log("project", this);
+      this.status = "Completed";
       this.appendCompletedTasks();
     });
     return completedSort;
@@ -158,7 +161,7 @@ class Project {
     activeSort.className = "mdl-menu__item";
     activeSort.innerText = "active";
     activeSort.addEventListener("click", e => {
-      console.log("project", this);
+      this.status = "Active";
       this.appendActiveTasks();
     });
     return activeSort;

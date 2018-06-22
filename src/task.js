@@ -30,6 +30,9 @@ class Task {
   // Creating span element, make task editable
   returnLiSpan() {
     let span = document.createElement("span");
+    if (this.status === "Completed") {
+      span.style["text-decoration"] = "line-through";
+    }
     span.className = "mdl-list__item-primary-content";
     span.innerText = this.description;
     span.addEventListener("dblclick", () => {

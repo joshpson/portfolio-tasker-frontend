@@ -11,6 +11,7 @@ class Task {
 
   append(element) {
     element.appendChild(this.returnListElement());
+    componentHandler.upgradeElements(element);
   }
 
   // Make list, add list items, make list items draggable
@@ -44,15 +45,36 @@ class Task {
   returnCheckBoxSpan(li) {
     let checkSpan = document.createElement("span");
     checkSpan.className = "mdl-list__item-secondary-action";
+    let toggleLabel = document.createElement("label");
+    toggleLabel.className = "mdl-switch mdl-js-switch mdl-js-ripple-effect";
+    toggleLabel.setAttribute("for", `switch-1-task-${this.id}`);
     let checkBox = document.createElement("input");
-    checkBox.className = "mdl-checkbox__input";
+    checkBox.id = `switch-1-task-${this.id}`;
+    checkBox.className = "mdl-switch__input";
     checkBox.type = "checkbox";
+    if(this.status === "Completed") {
+      checkBox.checked = true;
+    } else {
+      checkBox.checked = false;
+    }
+    let toggleSpan = document.createElement("span");
+    toggleSpan.className = "mdl-switch__label";
+    toggleLabel.appendChild(toggleSpan);
+    toggleLabel.appendChild(checkBox);
     checkBox.addEventListener("change", e => {
-      this.status = "Completed";
-      li.remove();
-      patchTask(this);
+      console.log(e.target);
+      if(e.target.checked === true){
+        this.status = "Completed";
+        this.project.appendActiveTasks();
+      } else {
+        this.status = "Active";
+        this.project.appendCompletedTasks();
+      }
+      // this.status = "Completed";
+      // patchTask(this);
+      // li.remove();
     });
-    return checkSpan.appendChild(checkBox);
+    return checkSpan.appendChild(toggleLabel);
   }
 
   //Update list item descriptions

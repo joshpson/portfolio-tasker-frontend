@@ -53,9 +53,9 @@ function hideLoginFormDiv() {
 }
 
 function loginFormListener() {
-  loginForm().addEventListener("submit", function(e) {
+  loginForm().addEventListener("submit", function (e) {
     e.preventDefault();
-    currentUser = User.all.find(function(user) {
+    currentUser = User.all.find(function (user) {
       return user.username === loginData();
     });
     if (currentUser) {
@@ -65,12 +65,16 @@ function loginFormListener() {
 }
 
 function newUserFormListener() {
-  newUserForm().addEventListener("submit", function(e) {
+  newUserForm().addEventListener("submit", function (e) {
     e.preventDefault();
     postUser(newUserData()).then(json => {
       console.log(json);
-      currentUser = new User(json);
-      User.login();
+      if (json.status === "error") {
+        alert("username has already been taken")
+      } else {
+        currentUser = new User(json);
+        User.login();
+      }
     });
   });
 }

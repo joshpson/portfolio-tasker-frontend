@@ -51,6 +51,12 @@ class Task {
     let toggleLabel = document.createElement("label");
     toggleLabel.className = "mdl-switch mdl-js-switch mdl-js-ripple-effect";
     toggleLabel.setAttribute("for", `switch-1-task-${this.id}`);
+    toggleLabel.appendChild(this.returnCheckBox());
+    checkSpan.appendChild(toggleLabel);
+    return checkSpan;
+  }
+
+  returnCheckBox() {
     let checkBox = document.createElement("input");
     checkBox.id = `switch-1-task-${this.id}`;
     checkBox.className = "mdl-switch__input";
@@ -60,23 +66,26 @@ class Task {
     } else {
       checkBox.checked = false;
     }
-    let toggleSpan = document.createElement("span");
-    toggleSpan.className = "mdl-switch__label";
-    toggleLabel.appendChild(toggleSpan);
-    toggleLabel.appendChild(checkBox);
+    this.addCheckBoxEventListener(checkBox);
+    return checkBox;
+  }
+
+  addCheckBoxEventListener(checkBox) {
     checkBox.addEventListener("change", e => {
-      console.log(e.target);
       if (e.target.checked === true) {
         this.status = "Completed";
-        this.project.appendActiveTasks();
+        setTimeout(() => {
+          this.project.appendActiveTasks();
+        }, 400);
         patchTask(this);
       } else {
         this.status = "Active";
-        this.project.appendCompletedTasks();
+        setTimeout(() => {
+          this.project.appendCompletedTasks();
+        }, 400);
         patchTask(this);
       }
     });
-    return checkSpan.appendChild(toggleLabel);
   }
 
   //Update list item descriptions

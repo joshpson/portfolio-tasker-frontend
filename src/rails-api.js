@@ -86,7 +86,6 @@ function patchTask(task) {
     description: task.description,
     due_date: task.due_date,
     project_id: task.project_id,
-    user_id: task.user_id,
     status: task.status
   };
   fetch(`http://localhost:3000/api/v1/tasks/${task.id}`, {
@@ -99,15 +98,3 @@ function patchTask(task) {
   }).then(res => res.json());
 }
 
-//UserProject CRUD
-
-function postUserProject(data) {
-  fetch(`http://localhost:3000/api/v1/userprojects/`, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data)
-  }).then(res => res.json());
-}

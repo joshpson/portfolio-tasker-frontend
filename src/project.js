@@ -5,18 +5,16 @@ class Project {
     this.title = obj.title;
     this.description = obj.description;
     this.status = "Active";
-    this.tasks = this.createTasks(obj);
+    this.tasks = [];
+    this.createTasks(obj);
     Project.all.push(this);
   }
 
   createTasks(obj) {
-    let taskArray = [];
-    obj.tasks.forEach(taskData => {
+    obj.tasks.map(taskData => {
       let task = new Task(taskData);
-      task.project = this;
-      taskArray.push(task);
+      this.tasks.push(task);
     });
-    return taskArray;
   }
 
   //Task
@@ -26,7 +24,6 @@ class Project {
   }
 
   //Project Card Creation
-
   renderProjectDiv() {
     let projectDiv = this.returnProjectDiv();
     projectContainer().appendChild(projectDiv);
@@ -118,8 +115,8 @@ class Project {
     buttonDiv.className = "mdl-card__actions mdl-card--border";
     let deleteBtn = document.createElement("BUTTON");
     deleteBtn.className =
-      "mdl-button mdl-js-button mdl-button--raised mdl-button--colored";
-    deleteBtn.innerText = "Delete";
+      "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect";
+    deleteBtn.innerText = "Archive";
     deleteBtn.addEventListener("click", e => {
       deleteProject(this);
       div.parentElement.remove();

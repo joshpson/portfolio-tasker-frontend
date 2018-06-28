@@ -13,6 +13,7 @@ class Project {
   createTasks(obj) {
     obj.tasks.map(taskData => {
       let task = new Task(taskData);
+      task.project = this;
       this.tasks.push(task);
     });
   }

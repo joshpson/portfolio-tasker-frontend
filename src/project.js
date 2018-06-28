@@ -14,6 +14,7 @@ class Project {
     obj.tasks.map(taskData => {
       let task = new Task(taskData);
       task.project = this;
+      console.log(this);
       this.tasks.push(task);
     });
   }

@@ -92,6 +92,7 @@ class Task {
       setTimeout(() => {
         if (e.target.checked === true) {
           this.status = "Completed";
+          console.log(this);
           this.project.appendActiveTasks();
           patchTask(this);
         } else {

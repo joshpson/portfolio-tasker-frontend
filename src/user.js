@@ -7,7 +7,7 @@ class User {
   }
 
   initializeProjects() {
-    projectContainer().innerHTML = "";
+    //projectColumn1().innerHTML = "";
     this.projects.forEach(function(project) {
       getProject(project.id).then(json => {
         let project = new Project(json);

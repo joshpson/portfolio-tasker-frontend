@@ -55,11 +55,20 @@ function hideLoginFormDiv() {
 function loginFormListener() {
   loginForm().addEventListener("submit", function(e) {
     e.preventDefault();
-    currentUser = User.all.find(function(user) {
-      return user.username === loginData();
-    });
-    if (currentUser) {
-      User.login();
+    if (loginData() === "demo") {
+      let randUser = Math.floor(Math.random() * 100000000);
+      console.log("demo");
+      postUser(randUser).then(json => {
+        currentUser = new User(json);
+        User.login();
+      });
+    } else {
+      currentUser = User.all.find(function(user) {
+        return user.username === loginData();
+      });
+      if (currentUser) {
+        User.login();
+      }
     }
   });
 }
